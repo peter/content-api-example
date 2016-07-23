@@ -166,11 +166,9 @@ Here is an example entry from the update above:
 
 ```json
 {
-  "_id": ObjectId("578c775ef2b4a45b712b493a"),
   "action": "update",
   "errors": null,
   "doc": {
-    "_id": "578c774ef2b4a45b712b4936",
     "slug": {
       "se": "my-section"
     },
@@ -178,12 +176,12 @@ Here is an example entry from the update above:
     "title": {
       "se": "My Section EDIT"
     },
-    "updated_at": ISODate("2016-07-18T06:29:50.142Z"),
+    "updated_at": "2016-07-18T06:29:50.142Z",
     "id": 1,
     "updated_by": "admin@example.com",
-    "version": NumberLong("2"),
+    "version": 2,
     "created_by": "admin@example.com",
-    "created_at": ISODate("2016-07-18T06:29:34.924Z")
+    "created_at": "2016-07-18T06:29:34.924Z"
   },
   "changes": {
     "title": {
@@ -196,7 +194,7 @@ Here is an example entry from the update above:
     }
   },
   "created_by": "admin@example.com",
-  "created_at": ISODate("2016-07-18T06:29:50.167Z")
+  "created_at": "2016-07-18T06:29:50.167Z"
 }
 ```
 
