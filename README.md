@@ -1,7 +1,7 @@
-# Content API Example
+# Versioned Example
 
-This is an example Clojure app to showcase how to use the [content-api](https://github.com/peter/content-api)
-library. The content-api library provides a CMS REST API based on MongoDB with user authentication, JSON schema validation, versioning, publishing, and relationships.
+This is an example Clojure app to showcase how to use the [versioned](https://github.com/peter/versioned)
+framework. The versioned library provides a CMS REST API based on MongoDB with user authentication, JSON schema validation, versioning, publishing, and relationships.
 
 ## Getting Started
 
@@ -10,17 +10,17 @@ First make sure you have [Leiningen/Clojure](http://leiningen.org) and Mongodb i
 Get the source:
 
 ```bash
-git clone git@github.com:peter/content-api-example.git
-cd content-api-example
+git clone git@github.com:peter/versioned-example.git
+cd versioned-example
 ```
 
 Create an admin user:
 
 ```
 lein repl
-(require '[app.content-api-example :as content-api-example])
-(def system (content-api-example/-main :start-web false))
-(require '[content-api.models.users :as users])
+(require '[app.versioned-example :as versioned-example])
+(def system (versioned-example/-main :start-web false))
+(require '[versioned.models.users :as users])
 (users/create (:app system) {:name "Admin User" :email "admin@example.com" :password "admin"})
 exit
 ```
@@ -43,7 +43,7 @@ Basic CRUD workflow:
 
 ```bash
 # create
-curl -i -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"sections": {"title": {"se": "My Section"}, "slug": {"se": "my-section"}}}' http://localhost:5000/v1/sections
+curl -i -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"data": {"attributes": {"title": {"se": "My Section"}, "slug": {"se": "my-section"}}}}' http://localhost:5000/v1/sections
 
 # get
 curl -i -H "Authorization: Bearer $TOKEN" http://localhost:5000/v1/sections/1
@@ -52,7 +52,7 @@ curl -i -H "Authorization: Bearer $TOKEN" http://localhost:5000/v1/sections/1
 curl -i -H "Authorization: Bearer $TOKEN" http://localhost:5000/v1/sections
 
 # update
-curl -i -X PUT -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"sections": {"title": {"se": "My Section EDIT"}}}' http://localhost:5000/v1/sections/1
+curl -i -X PUT -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"data": {"attributes": {"title": {"se": "My Section EDIT"}}}}' http://localhost:5000/v1/sections/1
 
 # delete
 curl -i -X DELETE -H "Authorization: Bearer $TOKEN" http://localhost:5000/v1/sections/1
@@ -61,11 +61,11 @@ curl -i -X DELETE -H "Authorization: Bearer $TOKEN" http://localhost:5000/v1/sec
 Now, let's look at versioning, associations, and publishing. Create two widgets and a page:
 
 ```bash
-curl -i -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"widgets": {"title": {"se": "Latest Movies"}, "published_version": 1}}' http://localhost:5000/v1/widgets
+curl -i -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"data": {"attributes": {"title": {"se": "Latest Movies"}, "published_version": 1}}}' http://localhost:5000/v1/widgets
 
-curl -i -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"widgets": {"title": {"se": "Latest Series"}}}' http://localhost:5000/v1/widgets
+curl -i -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"data": {"attributes": {"title": {"se": "Latest Series"}}}}' http://localhost:5000/v1/widgets
 
-curl -i -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"pages": {"title": {"se": "Start Page"}, "widgets_ids": [1, 2], "published_version": 1}}' http://localhost:5000/v1/pages
+curl -i -X POST -H 'Content-Type: application/json' -H "Authorization: Bearer $TOKEN" -d '{"data": {"attributes": {"title": {"se": "Start Page"}, "widgets_ids": [1, 2], "published_version": 1}}}' http://localhost:5000/v1/pages
 ```
 
 The first widget and the page are published since the `published_version` is set but the second widget is not. Now we can fetch the page with its associations:

@@ -1,8 +1,8 @@
-(ns app.content-api-example.models.pages
-  (:require [app.content-api-example.models.shared :refer [set-sites-callback sites-schema]]
-            [content-api.model-attributes :refer [translated-attribute]]
-            [content-api.model-spec :refer [generate-spec]]
-            [content-api.model-includes.content-base-model :refer [content-base-spec]]))
+(ns app.versioned-example.models.pages
+  (:require [app.versioned-example.models.shared :refer [set-sites-callback sites-schema]]
+            [versioned.model-attributes :refer [translated-attribute]]
+            [versioned.model-spec :refer [generate-spec]]
+            [versioned.model-includes.content-base-model :refer [content-base-spec]]))
 
 (def model-type :pages)
 

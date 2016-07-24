@@ -1,10 +1,10 @@
-(ns app.content-api-example.models.pages
-  (:require [app.content-api-example.models.shared :refer [set-sites-callback sites-schema]]
-            [content-api.model-attributes :refer [translated-attribute]]
-            [content-api.model-spec :refer [generate-spec]]
-            [content-api.model-includes.content-base-model :refer [content-base-spec]]))
+(ns app.versioned-example.models.widgets
+  (:require [app.versioned-example.models.shared :refer [set-sites-callback sites-schema]]
+            [versioned.model-attributes :refer [translated-attribute]]
+            [versioned.model-spec :refer [generate-spec]]
+            [versioned.model-includes.content-base-model :refer [content-base-spec]]))
 
-(def model-type :pages)
+(def model-type :widgets)
 
 (defn spec [config]
   (let [locales (:locales config)]
@@ -17,14 +17,8 @@
         :properties {
           :title (translated-attribute locales)
           :description (translated-attribute locales)
-          :slug (translated-attribute locales)
           :sites (sites-schema config)
-          :widgets_ids {
-            :type "array"
-            :items {
-              :type "integer"
-            }
-          }
+          :widgets_type {:type "string"}
           :legacy {:type "object"}
         }
         :additionalProperties false
@@ -34,9 +28,6 @@
         :save {
           :before [set-sites-callback]
         }
-      }
-      :relationships {
-        :widgets {}
       }
       :indexes [
         ;{:fields [:title] :unique true}
