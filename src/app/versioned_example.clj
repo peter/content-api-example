@@ -11,6 +11,7 @@
   }
   :sites sites
   :locales sites
+  :mongodb-url "mongodb://127.0.0.1/versioned-example"
 })
 
 (defn -main [& {:as custom-config}]

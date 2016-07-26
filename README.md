@@ -1,7 +1,7 @@
 # Versioned Example
 
 This is an example Clojure app to showcase how to use the [versioned](https://github.com/peter/versioned)
-framework. The versioned library provides a CMS REST API based on MongoDB with user authentication, JSON schema validation, versioning, publishing, and relationships.
+framework. The versioned framework provides a CMS REST API based on MongoDB with user authentication, JSON schema validation, versioning, publishing, and relationships.
 
 ## Getting Started
 
@@ -197,7 +197,3 @@ Here is an example entry from the update above:
   "created_at": "2016-07-18T06:29:50.167Z"
 }
 ```
-
-## How Models Work
-
-TODO: explain :type :schema :relationships :indexes :routes
